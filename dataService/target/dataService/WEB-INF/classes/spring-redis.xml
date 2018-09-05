@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!--注册Redis模块-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="keySerializer" ref="jdkSerializer"/>
+        <property name="valueSerializer" ref="jdkSerializer"/>
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+    <!--注册序列化器-->
+    <bean id="jdkSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+    <!--注册Redis连接工厂-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="redis"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <!--注册Cache注解驱动-->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <!--注册缓存管理器-->
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
+        <property name="cacheNames">
+            <list>
+                <value>realTimeCache</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--注册缓存配置对象-->
+    <bean class="com.am.p2p.dataService.cache.RedisCacheConfig"/>
+</beans>

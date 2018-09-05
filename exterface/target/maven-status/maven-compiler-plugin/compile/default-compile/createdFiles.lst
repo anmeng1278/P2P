@@ -1,0 +1,7 @@
+com\am\p2p\exterface\constant\Constans.class
+com\am\p2p\exterface\bean\BidInfo.class
+com\am\p2p\exterface\service\IUserService.class
+com\am\p2p\exterface\bean\User.class
+com\am\p2p\exterface\bean\LoanInfo.class
+com\am\p2p\exterface\service\IBidInfoService.class
+com\am\p2p\exterface\service\ILoandInfoService.class

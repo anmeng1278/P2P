@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="web"/>
+
+    <!--注册zk注册中心-->
+    <dubbo:registry address="zookeeper://zk:2181"/>
+
+    <!--注册服务消费者-->
+    <dubbo:reference id="loandInfoService" check="false"
+            interface="com.am.p2p.exterface.service.ILoandInfoService"/>
+    <dubbo:reference id="bidInfoService" check="false"
+            interface="com.am.p2p.exterface.service.IBidInfoService"/>
+    <dubbo:reference id="userService" check="false"
+            interface="com.am.p2p.exterface.service.IUserService"/>
+</beans>

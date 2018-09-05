@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.p2p.dataService.dao.ILoanInfoDao">
+	
+	<resultMap type="LoanInfo" id="loanInfoMap">
+		<id column="id" property="id"/>
+		<result column="product_name" property="productName"/>
+		<result column="rate" property="rate"/>
+		<result column="cycle" property="cycle"/>
+		<result column="release_time" property="releaseTime"/>
+		<result column="product_type" property="productType"/>
+		<result column="product_no" property="productNo"/>
+		<result column="product_money" property="productMoney"/>
+		<result column="left_product_money" property="leftProductMoney"/>
+		<result column="bid_min_limit" property="bidMinLimit"/>
+		<result column="bid_max_limit" property="bidMaxLimit"/>
+		<result column="product_status" property="productStatus"/>
+		<result column="product_full_time" property="productFullTime"/>
+		<result column="product_desc" property="productDesc"/>
+		<result column="version" property="version"/>
+	</resultMap>
+
+	<select id="selectLoanInfoByProductTypeAndPage" resultMap="loanInfoMap">
+		select *
+		from b_loan_info
+		where product_type = #{productType}
+		order by release_time desc
+		limit #{pageStartIndex},#{pageSize}
+	</select>
+	
+</mapper>
